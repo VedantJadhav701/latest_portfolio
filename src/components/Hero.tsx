@@ -20,11 +20,6 @@ export default function Hero() {
     show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 100, damping: 10 } }
   };
 
-  const floating = {
-    y: [-10, 10],
-    transition: { y: { duration: 2, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" } }
-  };
-
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">
       
@@ -40,12 +35,12 @@ export default function Hero() {
         
         {/* Floating Tags */}
         <motion.div variants={item} className="mb-10 flex flex-wrap justify-center gap-3 text-xs md:text-sm font-mono font-bold text-gray-300">
-          {['Machine Learning Engineer', 'AI Engineer', 'MLOps Engineer', 'LLM & RAG Developer', 'Data Scientist'].map((tag, i) => (
+          {['AI Engineer', 'Generative AI', 'Agentic AI', 'Physical AI & Robotics', 'Large Language Models (LLMs)', 'MLOps'].map((tag, i) => (
             <motion.span 
               key={tag}
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 2, repeat: Infinity, delay: i * 0.2, ease: "easeInOut" }}
-              className="px-4 py-1.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+              className="px-4 py-1.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:border-[var(--neon-accent)]/40 transition-colors"
             >
               {tag}
             </motion.span>
@@ -54,7 +49,7 @@ export default function Hero() {
         
         {/* Main Headline */}
         <motion.div variants={item} className="mb-8 mt-6">
-          <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-black tracking-tighter leading-[1.0] drop-shadow-2xl">
+          <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-black tracking-tighter leading-[1.0] drop-shadow-2xl text-white">
             Building AI Systems <br className="hidden md:block"/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 via-gray-400 to-gray-600 inline-block">
               for Real-World Impact.
@@ -75,17 +70,17 @@ export default function Hero() {
         </motion.div>
 
         {/* Magnetic Interactive CTAs */}
-        <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-6">
+        <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link href="#projects">
             <motion.div
-              whileHover={{ scale: 1.05, boxShadow: "0px 0px 30px rgba(255, 255, 255, 0.4)" }}
+              whileHover={{ scale: 1.05, boxShadow: "0px 0px 30px rgba(10, 132, 255, 0.4)" }}
               whileTap={{ scale: 0.95 }}
-              className="h-14 px-10 rounded-xl bg-white text-black font-bold flex items-center justify-center gap-3 group relative overflow-hidden"
+              className="h-14 px-8 rounded-xl bg-white text-black font-bold flex items-center justify-center gap-3 group relative overflow-hidden cursor-pointer w-full sm:w-auto"
             >
               {/* Sweep effect on hover */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
               <Zap className="w-5 h-5 text-black" fill="currentColor" />
-              <span className="text-lg">View Projects</span>
+              <span className="text-base md:text-lg">View Projects</span>
             </motion.div>
           </Link>
           
@@ -93,12 +88,22 @@ export default function Hero() {
             <motion.div
               whileHover={{ scale: 1.05, borderColor: "rgba(255, 255, 255, 0.5)", backgroundColor: "rgba(255, 255, 255, 0.1)" }}
               whileTap={{ scale: 0.95 }}
-              className="h-14 px-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/20 text-white font-bold flex items-center justify-center gap-3 transition-colors"
+              className="h-14 px-8 rounded-xl bg-black/50 backdrop-blur-md border border-white/20 text-white font-bold flex items-center justify-center gap-3 transition-colors cursor-pointer w-full sm:w-auto"
             >
-              <span className="text-lg">View Research</span>
+              <span className="text-base md:text-lg">View Research</span>
               <ChevronRight className="w-5 h-5" />
             </motion.div>
           </Link>
+
+          <a href="/vedantjadhav_resume.pdf" download="Vedant_Jadhav_Resume.pdf" className="w-full sm:w-auto">
+            <motion.div
+              whileHover={{ scale: 1.05, borderColor: "var(--neon-accent-secondary)", backgroundColor: "rgba(191, 90, 242, 0.1)" }}
+              whileTap={{ scale: 0.95 }}
+              className="h-14 px-8 rounded-xl bg-black/50 backdrop-blur-md border border-[var(--neon-accent-secondary)]/30 text-[var(--neon-accent-secondary)] font-bold flex items-center justify-center gap-3 transition-colors cursor-pointer w-full"
+            >
+              <span className="text-base md:text-lg">Download Resume</span>
+            </motion.div>
+          </a>
         </motion.div>
       </motion.div>
     </section>

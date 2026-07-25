@@ -6,6 +6,8 @@
   --accent-blue: #0A84FF;
   --accent-teal: #30D158;
   --accent-purple: #BF5AF2;
+  --neon-accent: #0A84FF;
+  --neon-accent-secondary: #BF5AF2;
 }
 
 @theme inline {
