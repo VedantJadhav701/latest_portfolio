@@ -70,17 +70,17 @@ export default function Hero() {
         </motion.div>
 
         {/* Magnetic Interactive CTAs */}
-        <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <Link href="#projects">
             <motion.div
               whileHover={{ scale: 1.05, boxShadow: "0px 0px 30px rgba(10, 132, 255, 0.4)" }}
               whileTap={{ scale: 0.95 }}
-              className="h-14 px-8 rounded-xl bg-white text-black font-bold flex items-center justify-center gap-3 group relative overflow-hidden cursor-pointer w-full sm:w-auto"
+              className="h-14 px-10 rounded-xl bg-white text-black font-bold flex items-center justify-center gap-3 group relative overflow-hidden cursor-pointer"
             >
               {/* Sweep effect on hover */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
               <Zap className="w-5 h-5 text-black" fill="currentColor" />
-              <span className="text-base md:text-lg">View Projects</span>
+              <span className="text-lg">View Projects</span>
             </motion.div>
           </Link>
           
@@ -88,22 +88,12 @@ export default function Hero() {
             <motion.div
               whileHover={{ scale: 1.05, borderColor: "rgba(255, 255, 255, 0.5)", backgroundColor: "rgba(255, 255, 255, 0.1)" }}
               whileTap={{ scale: 0.95 }}
-              className="h-14 px-8 rounded-xl bg-black/50 backdrop-blur-md border border-white/20 text-white font-bold flex items-center justify-center gap-3 transition-colors cursor-pointer w-full sm:w-auto"
+              className="h-14 px-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/20 text-white font-bold flex items-center justify-center gap-3 transition-colors cursor-pointer"
             >
-              <span className="text-base md:text-lg">View Research</span>
+              <span className="text-lg">View Research</span>
               <ChevronRight className="w-5 h-5" />
             </motion.div>
           </Link>
-
-          <a href="/vedantjadhav_resume.pdf" download="Vedant_Jadhav_Resume.pdf" className="w-full sm:w-auto">
-            <motion.div
-              whileHover={{ scale: 1.05, borderColor: "var(--neon-accent-secondary)", backgroundColor: "rgba(191, 90, 242, 0.1)" }}
-              whileTap={{ scale: 0.95 }}
-              className="h-14 px-8 rounded-xl bg-black/50 backdrop-blur-md border border-[var(--neon-accent-secondary)]/30 text-[var(--neon-accent-secondary)] font-bold flex items-center justify-center gap-3 transition-colors cursor-pointer w-full"
-            >
-              <span className="text-base md:text-lg">Download Resume</span>
-            </motion.div>
-          </a>
         </motion.div>
       </motion.div>
     </section>

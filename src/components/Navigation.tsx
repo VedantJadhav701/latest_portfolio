@@ -62,13 +62,6 @@ export default function Navigation() {
         </div>
 
         <div className="flex items-center space-x-2 md:space-x-4">
-          <a 
-            href="/vedantjadhav_resume.pdf" 
-            download="Vedant_Jadhav_Resume.pdf" 
-            className="hidden sm:inline-block px-4 py-1.5 rounded-full text-xs font-mono font-bold bg-white/5 border border-white/10 hover:border-[var(--neon-accent-secondary)] hover:bg-white/10 text-gray-300 hover:text-white transition-all"
-          >
-            Resume
-          </a>
           <Link href="https://github.com/VedantJadhav701" target="_blank" className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all">
             <Github className="w-5 h-5" />
           </Link>
