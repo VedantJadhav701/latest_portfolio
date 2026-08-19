@@ -1,124 +1,124 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
 
-const experiences = [
+const EXPERIENCES = [
   {
     role: 'AI Engineer Intern',
     company: 'Tech Mahindra',
     location: 'Pune, Maharashtra',
-    date: 'Jun. 2026 – Present',
-    points: [
-      'Contributing to research and development of Vision Language Models (VLMs), Domain-Specific Language Models (DSLMs), and Generative AI systems for enterprise applications.',
-      'Developing AI pipelines involving Retrieval-Augmented Generation (RAG), semantic search, agentic AI workflows, and multimodal learning using modern open-source LLMs.',
-      'Working with technologies including Python, PyTorch, FastAPI, LangGraph, Hugging Face, and Ollama to build scalable AI solutions and research prototypes.'
+    period: 'Jun. 2026 – Present',
+    highlights: [
+      'Led the AI team as a Young AI Engineer on the development of Indus, contributing to model experimentation, evaluation, AI system design, and technical implementation.',
+      'Worked on DSLMs, VLMs, and Generative AI systems, building pipelines spanning data prep, retrieval, inference, evaluation, and deployment; worked with NVIDIA Nemotron 3.5 for LLM experimentation under practical compute constraints.',
+      'Designed and implemented RAG, semantic retrieval, and agentic AI workflows using Python, PyTorch, Hugging Face, LangGraph, FastAPI, and Ollama.',
     ],
-    color: '#4285F4' // Google Blue
+    tech: ['Indus LLM', 'NVIDIA Nemotron 3.5', 'DSLMs', 'VLMs', 'LangGraph', 'PyTorch', 'FastAPI'],
+    type: 'Industry Experience',
   },
   {
     role: 'AI Engineer Intern',
     company: 'DPulseAI Pvt. Ltd.',
     location: 'Pune, Maharashtra',
-    date: 'Oct. 2025 – Apr. 2026',
-    points: [
-      'Built production Generative AI and RAG systems; achieved 35% retrieval accuracy improvement and 45% latency reduction through hybrid chunking and reranking strategies.',
-      'Architected Dockerized LLM inference pipelines with CI/CD and canary deployments; reduced deployment time to under 10 minutes using GitHub Actions and Docker Registry.',
-      'Implemented KV cache quantization-based cost optimization and post-deployment drift monitoring; cut inference memory usage significantly on consumer-grade hardware.'
+    period: 'Oct. 2025 – Apr. 2026',
+    highlights: [
+      'Built production Generative AI and RAG systems, improving retrieval accuracy by 35% and reducing latency by 45% through hybrid chunking and reranking strategies.',
+      'Architected Dockerized LLM inference pipelines with CI/CD and canary deployments, cutting deployment time to under 10 minutes using GitHub Actions and Docker Registry.',
+      'Implemented KV-cache quantization and post-deployment drift monitoring, reducing inference memory requirements and improving LLM serving efficiency on consumer-grade hardware.',
     ],
-    color: '#FBBC05' // Google Yellow
-  }
+    tech: ['RAG Systems', 'Hybrid Chunking', 'Docker', 'CI/CD Canary', 'KV-Cache Quantization', 'GitHub Actions'],
+    type: 'Industry Experience',
+  },
+  {
+    role: 'B.Tech. in AI & Machine Learning',
+    company: 'Pimpri Chinchwad University',
+    location: 'Pune, Maharashtra',
+    period: '2023 – 2027',
+    highlights: [
+      'Specializing in Artificial Intelligence and Machine Learning with a aggregate CGPA of 8.10 / 10.0.',
+      'Active researcher in State Space Models (Mamba-2), Agentic AI, and Small Language Models (SLMs).',
+    ],
+    tech: ['8.10 CGPA', 'AI & ML Major', 'Published Researcher', 'Hackathon Champion'],
+    type: 'Academic Education',
+  },
 ];
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 relative w-full z-10">
-      <div className="max-w-5xl mx-auto px-6">
-        
+    <section id="experience" className="bg-[#0a0a0a] py-16 md:py-24 relative z-10 border-t border-[#1f1f1f]">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mb-12 md:mb-16"
         >
-          <h2 className="text-sm font-mono text-[#FBBC05] uppercase tracking-widest mb-4">Professional History</h2>
-          <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-white">Career Timeline</h3>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-[#1f1f1f]" />
+            <span className="text-xs text-[#878787] uppercase tracking-[0.3em] font-mono">
+              CAREER &amp; EDUCATION
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-normal text-[#f5f5f5] tracking-tight">
+            Work <span className="font-display italic text-[#f5f5f5]">experience</span>
+          </h2>
         </motion.div>
 
-        <div className="space-y-12 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:w-[2px] before:bg-white/10 before:-z-10">
-          {experiences.map((exp, idx) => (
+        {/* Timeline Stack */}
+        <div className="space-y-6">
+          {EXPERIENCES.map((exp, idx) => (
             <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
+              key={exp.company + exp.role}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-              className={`flex flex-col md:flex-row gap-8 relative items-stretch ${
-                idx % 2 === 0 ? 'md:flex-row-reverse' : ''
-              }`}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.7, delay: idx * 0.1 }}
+              className="group rounded-3xl bg-[#141414] border border-[#1f1f1f] p-6 md:p-8 hover:border-white/20 transition-all duration-300 relative overflow-hidden"
             >
-              {/* Central node on timeline */}
-              <div 
-                className="absolute left-4 md:left-1/2 -translate-x-[7px] w-[16px] h-[16px] rounded-full bg-[#050505] border-[3px] z-20 top-8 transition-transform group-hover:scale-125"
-                style={{ borderColor: exp.color, boxShadow: `0 0 10px ${exp.color}` }}
-              />
-
-              {/* Spacing for layout */}
-              <div className="hidden md:block w-1/2" />
-
-              {/* Main Content Card */}
-              <motion.div
-                whileHover={{ y: -5, scale: 1.01 }}
-                className="w-full md:w-1/2 glass-card p-8 rounded-2xl border border-white/10 hover:border-white/20 bg-[#050505]/40 backdrop-blur-xl transition-all relative overflow-hidden group pl-8 md:pl-8"
-              >
-                {/* Accent Side Ribbon */}
-                <div 
-                  className="absolute left-0 top-0 bottom-0 w-[5px] opacity-70 group-hover:opacity-100 transition-opacity"
-                  style={{ backgroundColor: exp.color }}
-                />
-
-                <div className="flex flex-col gap-3 mb-6">
-                  <div className="flex items-center justify-between flex-wrap gap-2">
-                    <span 
-                      className="px-3 py-1 rounded-full text-xs font-mono font-bold"
-                      style={{ backgroundColor: `${exp.color}15`, color: exp.color, border: `1px solid ${exp.color}30` }}
-                    >
-                      {exp.role}
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-[11px] font-mono text-[#89AACC] uppercase tracking-wider px-3 py-0.5 rounded-full bg-[#0a0a0a] border border-[#1f1f1f]">
+                      {exp.type}
                     </span>
-                    <div className="flex items-center gap-1.5 text-gray-400 font-mono text-xs">
-                      <Calendar className="w-3.5 h-3.5" />
-                      <span>{exp.date}</span>
-                    </div>
+                    <span className="text-xs text-[#878787] font-mono">{exp.period}</span>
                   </div>
-                  
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <h4 className="text-2xl font-extrabold text-white">{exp.company}</h4>
-                    <span className="text-gray-500 text-sm flex items-center gap-1">
-                      <MapPin className="w-3 h-3" />
-                      {exp.location}
-                    </span>
-                  </div>
+                  <h3 className="text-2xl font-normal text-[#f5f5f5] flex items-center gap-2 flex-wrap">
+                    <span>{exp.company}</span>
+                    <span className="text-sm font-display italic text-[#878787]">&bull; {exp.role}</span>
+                  </h3>
                 </div>
 
-                <ul className="space-y-4">
-                  {exp.points.map((point, i) => (
-                    <motion.li 
-                      key={i}
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.2 + (i * 0.1) }}
-                      className="flex items-start gap-3"
-                    >
-                      <div 
-                        className="w-1.5 h-1.5 rounded-full mt-2 shrink-0" 
-                        style={{ backgroundColor: exp.color, boxShadow: `0 0 8px ${exp.color}` }}
-                      />
-                      <p className="text-gray-300 leading-relaxed font-medium text-sm">{point}</p>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
+                <div className="text-xs text-[#878787] font-mono flex items-center gap-1.5 self-start md:self-auto">
+                  <span>📍</span>
+                  <span>{exp.location}</span>
+                </div>
+              </div>
+
+              {/* Bullet points */}
+              <ul className="space-y-2.5 mb-6 text-xs sm:text-sm text-[#878787] leading-relaxed">
+                {exp.highlights.map((point, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="text-[#89AACC] font-bold mt-1">&rarr;</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Technologies / Tags */}
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-[#1f1f1f]">
+                {exp.tech.map((t) => (
+                  <span
+                    key={t}
+                    className="text-[10px] font-mono text-[#878787] px-2.5 py-1 rounded-md bg-[#0a0a0a] border border-[#1f1f1f]"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
             </motion.div>
           ))}
         </div>

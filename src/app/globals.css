@@ -1,67 +1,81 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #f4f4f5;
-  --accent-blue: #0A84FF;
-  --accent-teal: #30D158;
-  --accent-purple: #BF5AF2;
-  --neon-accent: #0A84FF;
-  --neon-accent-secondary: #BF5AF2;
+  --bg: 0 0% 4%;
+  --surface: 0 0% 8%;
+  --text: 0 0% 96%;
+  --muted: 0 0% 53%;
+  --stroke: 0 0% 12%;
+  --accent: 0 0% 96%;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+@theme {
+  --color-bg: hsl(var(--bg));
+  --color-surface: hsl(var(--surface));
+  --color-text-primary: hsl(var(--text));
+  --color-muted: hsl(var(--muted));
+  --color-stroke: hsl(var(--stroke));
+  --font-body: var(--font-body), sans-serif;
+  --font-display: var(--font-display), serif;
 }
 
-/* Stitch Aurora Mesh and Particle Grid */
-
-.bg-particle-grid {
-  /* This creates a 30x30px grid of tiny glowing dots exactly like Gemini */
-  background-size: 30px 30px;
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.4) 1px, transparent 0);
+body {
+  background-color: hsl(var(--bg));
+  color: hsl(var(--text));
+  font-family: var(--font-body);
 }
 
-/* The horizontal glowing wave */
-.aurora-mesh {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 140vw; /* Extremely wide to stretch across screen */
-  height: 60vh; /* Narrower vertically to create a wave */
-  background: 
-    radial-gradient(ellipse at 50% 50%, rgba(138, 43, 226, 0.4) 0%, transparent 60%), /* Center Purple */
-    radial-gradient(ellipse at 80% 50%, rgba(0, 212, 255, 0.5) 0%, transparent 60%), /* Right Cyan */
-    radial-gradient(ellipse at 20% 50%, rgba(147, 51, 234, 0.6) 0%, transparent 60%); /* Left Deep Purple */
-  filter: blur(100px);
-  mix-blend-mode: screen;
-  pointer-events: none;
-  border-radius: 100%; /* Makes it an elliptical wave */
-  animation: aurora-shift 25s infinite alternate ease-in-out;
+/* Custom Utilities */
+.accent-gradient {
+  background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%);
 }
 
-@keyframes aurora-shift {
-  0% { transform: translate(-50%, -50%) rotate(-3deg) scale(1) skewX(0deg); }
-  50% { transform: translate(-48%, -45%) rotate(2deg) scale(1.05) skewX(5deg); }
-  100% { transform: translate(-52%, -55%) rotate(-1deg) scale(1) skewX(-5deg); }
+.accent-gradient-text {
+  background: linear-gradient(90deg, #89AACC 0%, #4E85BF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Glassmorphism Refinement for the new background */
-@layer utilities {
-  .glass-card {
-    background: rgba(30, 30, 35, 0.4); /* Darker frost for contrast against bright aurora */
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
+.halftone-overlay {
+  background-image: radial-gradient(circle, #000 1px, transparent 1px);
+  background-size: 4px 4px;
 }
 
-::selection {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+/* Keyframe Animations */
+@keyframes scroll-down {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
 }
+
+@keyframes role-fade-in {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-scroll-down {
+  animation: scroll-down 1.5s ease-in-out infinite;
+}
+
+.animate-role-fade-in {
+  animation: role-fade-in 0.4s ease-out forwards;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+/* Glassmorphism */
+.glass-card {
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+

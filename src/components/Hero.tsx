@@ -1,100 +1,184 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
-import { ChevronRight, Zap } from 'lucide-react';
-import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Hls from 'hls.js';
+
+const ROLES = ['AI Engineer', 'LLM Researcher', 'Agentic AI Developer', 'Multimodal Specialist'];
+const HLS_URL = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
 
 export default function Hero() {
-  
-  // Animation variants for staggering children
-  const container: Variants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
-    }
-  };
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [roleIndex, setRoleIndex] = useState(0);
 
-  const item: Variants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    show: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 100, damping: 10 } }
-  };
+  // Setup HLS Video
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    let hls: Hls | null = null;
+
+    if (Hls.isSupported()) {
+      hls = new Hls({ enableWorker: true });
+      hls.loadSource(HLS_URL);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.play().catch(() => {});
+      });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = HLS_URL;
+      video.addEventListener('loadedmetadata', () => {
+        video.play().catch(() => {});
+      });
+    }
+
+    return () => {
+      if (hls) {
+        hls.destroy();
+      }
+    };
+  }, []);
+
+  // Cycling Roles
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % ROLES.length);
+    }, 2200);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">
-      
-      {/* Central Intense Glow Behind Text */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[var(--neon-accent)]/10 blur-[120px] rounded-[100%] pointer-events-none z-0" />
+    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24 pb-16 bg-[#0a0a0a]">
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute top-1/2 left-1/2 min-w-full min-h-full object-cover -translate-x-1/2 -translate-y-1/2 opacity-35"
+        />
+        {/* Dark Overlays */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
+      </div>
 
-      <motion.div 
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative z-10 max-w-5xl mx-auto px-6 text-center"
+      {/* Hero Content */}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
+        {/* Eyebrow */}
+        <motion.div
+          initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-white/10 bg-[#141414]/70 backdrop-blur-md mb-8"
+        >
+          <span className="w-2 h-2 rounded-full accent-gradient animate-ping" />
+          <span className="text-xs text-[#878787] uppercase tracking-[0.3em] font-mono">
+            COLLECTION &apos;26 &bull; PUNE, INDIA
+          </span>
+        </motion.div>
+
+        {/* Name */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-6xl sm:text-8xl md:text-9xl font-display italic leading-[0.9] tracking-tight text-[#f5f5f5] mb-6 text-center select-none"
+        >
+          Vedant Sanjay Jadhav
+        </motion.h1>
+
+        {/* Role Line */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="text-lg sm:text-xl md:text-2xl text-[#878787] font-body mb-6 flex flex-wrap items-center justify-center gap-2"
+        >
+          <span>An</span>
+          <span className="relative inline-block overflow-hidden h-[1.3em] min-w-[190px] sm:min-w-[240px] text-center">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={roleIndex}
+                initial={{ y: 25, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -25, opacity: 0 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+                className="absolute inset-x-0 font-display italic text-[#f5f5f5] font-normal"
+              >
+                {ROLES[roleIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+          <span>based in Pune.</span>
+        </motion.div>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="text-sm sm:text-base text-[#878787] max-w-lg mb-10 text-center leading-relaxed"
+        >
+          Specializing in Mamba-2 &amp; Transformer LLMs, Agentic AI workflows, Multimodal systems, and high-performance RAG &amp; MLOps.
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+        >
+          {/* "See Works" - Solid Button */}
+          <a
+            href="#work"
+            className="group relative rounded-full text-sm font-medium px-8 py-3.5 bg-[#f5f5f5] text-[#0a0a0a] hover:scale-105 transition-transform duration-200 flex items-center justify-center gap-2 w-full sm:w-auto"
+          >
+            <span>See Works</span>
+            <span className="text-xs transition-transform group-hover:translate-y-0.5">↓</span>
+          </a>
+
+          {/* "Reach out..." - Outlined Button */}
+          <a
+            href="#contact"
+            className="group relative rounded-full text-sm font-medium px-8 py-3.5 border border-[#1f1f1f] bg-[#0a0a0a]/80 backdrop-blur-md text-[#f5f5f5] hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2 w-full sm:w-auto hover:border-transparent"
+          >
+            <span className="absolute inset-0 rounded-full accent-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 p-[1px]" />
+            <span className="absolute inset-[1px] rounded-full bg-[#0a0a0a] -z-10" />
+            <span>Reach out...</span>
+            <span className="text-xs transition-transform group-hover:translate-x-0.5">↗</span>
+          </a>
+
+          {/* "Resume PDF" */}
+          <a
+            href="/vedant_jadhav_resume_latest.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full text-sm font-medium px-6 py-3.5 text-[#878787] hover:text-[#f5f5f5] transition-colors flex items-center justify-center gap-1.5"
+          >
+            <span>Resume PDF</span>
+            <span className="text-xs opacity-70">↗</span>
+          </a>
+        </motion.div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
-        
-        {/* Floating Tags */}
-        <motion.div variants={item} className="mb-10 flex flex-wrap justify-center gap-3 text-xs md:text-sm font-mono font-bold text-gray-300">
-          {['AI Engineer', 'Generative AI', 'Agentic AI', 'Physical AI & Robotics', 'Large Language Models (LLMs)', 'MLOps'].map((tag, i) => (
-            <motion.span 
-              key={tag}
-              animate={{ y: [0, -5, 0] }}
-              transition={{ duration: 2, repeat: Infinity, delay: i * 0.2, ease: "easeInOut" }}
-              className="px-4 py-1.5 rounded-full border border-white/20 bg-black/40 backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:border-[var(--neon-accent)]/40 transition-colors"
-            >
-              {tag}
-            </motion.span>
-          ))}
-        </motion.div>
-        
-        {/* Main Headline */}
-        <motion.div variants={item} className="mb-8 mt-6">
-          <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-black tracking-tighter leading-[1.0] drop-shadow-2xl text-white">
-            Building AI Systems <br className="hidden md:block"/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-100 via-gray-400 to-gray-600 inline-block">
-              for Real-World Impact.
-            </span>
-          </h1>
-        </motion.div>
-
-        {/* Subtext */}
-        <motion.div variants={item} className="mb-14">
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-medium mb-4">
-            Designing, deploying, and scaling machine learning and AI systems across real-world applications.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm text-gray-500 font-mono uppercase tracking-widest">
-            <span>B.Tech. - Computer Science (AI & ML)</span>
-            <span className="hidden sm:inline">•</span>
-            <span>Pimpri Chinchwad University, Pune</span>
-          </div>
-        </motion.div>
-
-        {/* Magnetic Interactive CTAs */}
-        <motion.div variants={item} className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <Link href="#projects">
-            <motion.div
-              whileHover={{ scale: 1.05, boxShadow: "0px 0px 30px rgba(10, 132, 255, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
-              className="h-14 px-10 rounded-xl bg-white text-black font-bold flex items-center justify-center gap-3 group relative overflow-hidden cursor-pointer"
-            >
-              {/* Sweep effect on hover */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-              <Zap className="w-5 h-5 text-black" fill="currentColor" />
-              <span className="text-lg">View Projects</span>
-            </motion.div>
-          </Link>
-          
-          <Link href="#research">
-            <motion.div
-              whileHover={{ scale: 1.05, borderColor: "rgba(255, 255, 255, 0.5)", backgroundColor: "rgba(255, 255, 255, 0.1)" }}
-              whileTap={{ scale: 0.95 }}
-              className="h-14 px-10 rounded-xl bg-black/50 backdrop-blur-md border border-white/20 text-white font-bold flex items-center justify-center gap-3 transition-colors cursor-pointer"
-            >
-              <span className="text-lg">View Research</span>
-              <ChevronRight className="w-5 h-5" />
-            </motion.div>
-          </Link>
-        </motion.div>
+        <span className="text-[10px] text-[#878787] uppercase tracking-[0.25em] font-mono">
+          SCROLL
+        </span>
+        <div className="w-[1px] h-10 bg-[#1f1f1f] relative overflow-hidden">
+          <div className="w-full h-1/2 accent-gradient animate-scroll-down" />
+        </div>
       </motion.div>
     </section>
   );

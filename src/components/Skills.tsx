@@ -1,154 +1,134 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Terminal, Cpu, Database, Network, Flame, Shield } from 'lucide-react';
 
-const skillGroups = [
+const SKILL_CATEGORIES = [
   {
-    category: 'Generative & Foundation AI',
-    icon: <Flame className="w-5 h-5 text-purple-400" />,
-    color: 'border-purple-500/30 hover:border-purple-500/70 shadow-purple-500/5',
-    bulletColor: 'bg-purple-400',
+    category: 'LLM & Generative AI',
     skills: [
-      'Large Language Models (LLaMA, Qwen, Mistral)',
-      'Vision Language Models (VLMs)',
-      'Domain-Specific Language Models (DSLMs)',
-      'Small Language Models (SLMs)',
-      'Fine-Tuning (LoRA / QLoRA)',
-      'Retrieval-Augmented Generation (RAG)',
-      'KV Cache Quantization',
+      'LLMs',
+      'SLMs',
+      'DSLMs',
+      'VLMs',
+      'Pretraining',
+      'Fine-Tuning (LoRA/QLoRA)',
+      'RAG',
+      'Agentic AI',
+      'Multilingual NLP',
       'Inference Optimization',
-      'Hybrid Search'
-    ]
+    ],
   },
   {
-    category: 'AI Orchestration & Agents',
-    icon: <Network className="w-5 h-5 text-blue-400" />,
-    color: 'border-blue-500/30 hover:border-blue-500/70 shadow-blue-500/5',
-    bulletColor: 'bg-blue-400',
+    category: 'Model Architectures',
     skills: [
-      'LangGraph',
-      'LangChain',
-      'CrewAI',
-      'Model Context Protocol (MCP)',
-      'Multi-Agent Architectures',
-      'Autonomous Agents',
-      'Hugging Face Transformers',
-      'Ollama',
-      'Tool Calling & Tool Use'
-    ]
+      'Transformers',
+      'Mamba/Mamba-2',
+      'GQA',
+      'CNNs',
+      'RNNs',
+      'LSTMs',
+      'YOLOv8',
+    ],
   },
   {
-    category: 'Deep Learning & Core ML',
-    icon: <Cpu className="w-5 h-5 text-emerald-400" />,
-    color: 'border-emerald-500/30 hover:border-emerald-500/70 shadow-emerald-500/5',
-    bulletColor: 'bg-emerald-400',
+    category: 'AI Frameworks',
     skills: [
       'PyTorch',
       'TensorFlow',
-      'Mamba State Space Models',
-      'Computer Vision (YOLOv8)',
-      'Natural Language Processing (NLP)',
-      'CNNs, RNNs, LSTMs',
-      'Scikit-learn',
-      'Scientific Machine Learning (SciML)',
-      'Physics-informed ML'
-    ]
+      'Hugging Face Transformers',
+      'LangChain',
+      'LangGraph',
+      'Ollama',
+      'CrewAI',
+      'MCP',
+      'Tool Calling',
+    ],
   },
   {
-    category: 'Backend & MLOps',
-    icon: <Terminal className="w-5 h-5 text-amber-400" />,
-    color: 'border-amber-500/30 hover:border-amber-500/70 shadow-amber-500/5',
-    bulletColor: 'bg-amber-400',
+    category: 'AI Systems & MLOps',
     skills: [
       'FastAPI',
-      'Streamlit',
-      'Docker & Containerization',
-      'GitHub Actions (CI/CD)',
-      'LLMOps Pipelines',
+      'Docker',
+      'MLflow',
+      'Git',
+      'GitHub Actions / CI-CD',
       'Model Serving',
-      'Post-Deployment Drift Monitoring',
-      'Canary Deployments',
-      'MLflow'
-    ]
+      'LLMOps',
+      'Drift Monitoring',
+      'Canary Deployment',
+    ],
   },
   {
-    category: 'Vector DBs & Data Stack',
-    icon: <Database className="w-5 h-5 text-cyan-400" />,
-    color: 'border-cyan-500/30 hover:border-cyan-500/70 shadow-cyan-500/5',
-    bulletColor: 'bg-cyan-400',
+    category: 'Data & Retrieval',
     skills: [
-      'Qdrant (Vector Database)',
+      'Qdrant',
       'ChromaDB',
       'FAISS',
       'PostgreSQL',
       'MongoDB',
       'Pandas',
-      'NumPy'
-    ]
+      'NumPy',
+    ],
   },
   {
-    category: 'Languages & Core Focus',
-    icon: <Shield className="w-5 h-5 text-rose-400" />,
-    color: 'border-rose-500/30 hover:border-rose-500/70 shadow-rose-500/5',
-    bulletColor: 'bg-rose-400',
-    skills: [
-      'Python',
-      'C/C++',
-      'Generative AI Systems',
-      'Agentic AI Systems',
-      'Healthcare AI',
-      'Physical & Embodied AI',
-      'Memory-Augmented AI'
-    ]
-  }
+    category: 'Languages',
+    skills: ['Python', 'C/C++'],
+  },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 relative w-full z-10">
-      <div className="max-w-7xl mx-auto px-6">
-        
+    <section id="skills" className="bg-[#0a0a0a] py-16 md:py-24 relative z-10 border-t border-[#1f1f1f]">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mb-12 md:mb-16"
         >
-          <h2 className="text-sm font-mono text-[#34A853] uppercase tracking-widest mb-4">Capabilities</h2>
-          <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-white">Technical Stack & Expertise</h3>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-8 h-px bg-[#1f1f1f]" />
+            <span className="text-xs text-[#878787] uppercase tracking-[0.3em] font-mono">
+              TECHNICAL STACK
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-normal text-[#f5f5f5] tracking-tight">
+            Skills &amp; <span className="font-display italic text-[#f5f5f5]">technologies</span>
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillGroups.map((group, groupIdx) => (
+        {/* Skill Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {SKILL_CATEGORIES.map((cat, index) => (
             <motion.div
-              key={group.category}
+              key={cat.category}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: groupIdx * 0.08, duration: 0.5 }}
-              whileHover={{ scale: 1.02, y: -4 }}
-              className={`glass-card p-8 rounded-3xl border ${group.color} transition-all flex flex-col h-full bg-[#050505]/45 backdrop-blur-2xl shadow-[0_4px_30px_rgba(0,0,0,0.2)]`}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.7, delay: index * 0.08 }}
+              className="rounded-3xl bg-[#141414] border border-[#1f1f1f] p-6 hover:border-white/20 transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-white/10">
-                <div className="p-2.5 bg-white/5 rounded-xl border border-white/10">
-                  {group.icon}
-                </div>
-                <h4 className="text-xl font-extrabold text-white leading-tight">
-                  {group.category}
-                </h4>
-              </div>
-              
-              <div className="flex flex-wrap gap-2.5 mt-auto w-full">
-                {group.skills.map((skill) => (
-                  <span 
-                    key={skill} 
-                    className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/5 hover:border-white/15 rounded-xl hover:bg-white/10 transition-all text-xs font-semibold text-gray-300 cursor-default"
-                  >
-                    <div className={`w-1.5 h-1.5 rounded-full ${group.bulletColor}`} />
-                    <span>{skill}</span>
+              <div>
+                <h3 className="text-lg font-normal text-[#f5f5f5] mb-4 pb-3 border-b border-[#1f1f1f] flex items-center justify-between">
+                  <span>{cat.category}</span>
+                  <span className="text-xs font-mono text-[#878787]">
+                    0{index + 1}
                   </span>
-                ))}
+                </h3>
+
+                <div className="flex flex-wrap gap-2">
+                  {cat.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="text-xs font-mono text-[#f5f5f5]/80 px-3 py-1.5 rounded-full bg-[#0a0a0a] border border-[#1f1f1f] hover:border-white/20 transition-colors cursor-default"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
