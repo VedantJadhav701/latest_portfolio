@@ -152,17 +152,6 @@ export default function Hero() {
             <span>Reach out...</span>
             <span className="text-xs transition-transform group-hover:translate-x-0.5">↗</span>
           </a>
-
-          {/* "Resume PDF" */}
-          <a
-            href="/vedant_jadhav_resume_latest.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full text-sm font-medium px-6 py-3.5 text-[#878787] hover:text-[#f5f5f5] transition-colors flex items-center justify-center gap-1.5"
-          >
-            <span>Resume PDF</span>
-            <span className="text-xs opacity-70">↗</span>
-          </a>
         </motion.div>
       </div>
 

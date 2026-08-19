@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 
 const NAV_ITEMS = [
   { label: 'Home', href: '#home' },
@@ -9,7 +8,6 @@ const NAV_ITEMS = [
   { label: 'Experience', href: '#experience' },
   { label: 'Research', href: '#research' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Resume', href: '/vedant_jadhav_resume_latest.pdf', isExternal: true },
 ];
 
 export default function Navigation() {
@@ -35,8 +33,7 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, isExternal?: boolean) => {
-    if (isExternal) return; // Let default PDF link open
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
     const el = document.getElementById(targetId);
@@ -77,11 +74,9 @@ export default function Navigation() {
               <a
                 key={item.label}
                 href={item.href}
-                target={item.isExternal ? '_blank' : undefined}
-                rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                onClick={(e) => handleNavClick(e, item.href, item.isExternal)}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className={`text-xs sm:text-sm rounded-full px-2.5 sm:px-4 py-1.5 transition-all duration-200 ${
-                  isActive && !item.isExternal
+                  isActive
                     ? 'text-[#f5f5f5] bg-[#1f1f1f]'
                     : 'text-[#878787] hover:text-[#f5f5f5] hover:bg-[#1f1f1f]/60'
                 }`}
@@ -101,7 +96,6 @@ export default function Navigation() {
           onClick={(e) => handleNavClick(e, '#contact')}
           className="relative group rounded-full text-xs sm:text-sm px-3.5 sm:px-4 py-1.5 text-[#f5f5f5] font-medium transition-transform duration-200 hover:scale-105"
         >
-          {/* Animated gradient border on hover */}
           <span className="absolute inset-0 rounded-full accent-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 p-[1px]" />
           <span className="absolute inset-[1px] rounded-full bg-[#141414] -z-10 group-hover:bg-[#0a0a0a] transition-colors" />
           <span className="flex items-center gap-1">
