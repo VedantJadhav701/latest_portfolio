@@ -49,7 +49,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24 pb-16 bg-[#0a0a0a]">
+    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 sm:pt-24 pb-16 bg-[#0a0a0a]">
       {/* Background Video */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <video
@@ -67,16 +67,16 @@ export default function Hero() {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center flex flex-col items-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
         {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-white/10 bg-[#141414]/70 backdrop-blur-md mb-8"
+          className="inline-flex items-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full border border-white/10 bg-[#141414]/70 backdrop-blur-md mb-6 sm:mb-8"
         >
           <span className="w-2 h-2 rounded-full accent-gradient animate-ping" />
-          <span className="text-xs text-[#878787] uppercase tracking-[0.3em] font-mono">
+          <span className="text-[10px] sm:text-xs text-[#878787] uppercase tracking-[0.25em] font-mono">
             COLLECTION &apos;26 &bull; PUNE, INDIA
           </span>
         </motion.div>
@@ -86,7 +86,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          className="text-6xl sm:text-8xl md:text-9xl font-display italic leading-[0.9] tracking-tight text-[#f5f5f5] mb-6 text-center select-none"
+          className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl font-display italic leading-[0.95] tracking-tight text-[#f5f5f5] mb-4 sm:mb-6 text-center select-none max-w-full break-words"
         >
           Vedant Sanjay Jadhav
         </motion.h1>
@@ -96,10 +96,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-lg sm:text-xl md:text-2xl text-[#878787] font-body mb-6 flex flex-wrap items-center justify-center gap-2"
+          className="text-base sm:text-xl md:text-2xl text-[#878787] font-body mb-6 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2"
         >
           <span>An</span>
-          <span className="relative inline-block overflow-hidden h-[1.3em] min-w-[190px] sm:min-w-[240px] text-center">
+          <span className="relative inline-block overflow-hidden h-[1.3em] min-w-[160px] sm:min-w-[240px] text-center">
             <AnimatePresence mode="wait">
               <motion.span
                 key={roleIndex}
@@ -121,7 +121,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-sm sm:text-base text-[#878787] max-w-lg mb-10 text-center leading-relaxed"
+          className="text-xs sm:text-base text-[#878787] max-w-lg mb-8 sm:mb-10 text-center leading-relaxed"
         >
           Specializing in Mamba-2 &amp; Transformer LLMs, Agentic AI workflows, Multimodal systems, and high-performance RAG &amp; MLOps.
         </motion.p>
@@ -131,12 +131,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto px-4 sm:px-0"
         >
           {/* "See Works" - Solid Button */}
           <a
             href="#work"
-            className="group relative rounded-full text-sm font-medium px-8 py-3.5 bg-[#f5f5f5] text-[#0a0a0a] hover:scale-105 transition-transform duration-200 flex items-center justify-center gap-2 w-full sm:w-auto"
+            className="group relative rounded-full text-xs sm:text-sm font-medium px-8 py-3.5 bg-[#f5f5f5] text-[#0a0a0a] hover:scale-105 transition-transform duration-200 flex items-center justify-center gap-2 w-full sm:w-auto"
           >
             <span>See Works</span>
             <span className="text-xs transition-transform group-hover:translate-y-0.5">↓</span>
@@ -145,7 +145,7 @@ export default function Hero() {
           {/* "Reach out..." - Outlined Button */}
           <a
             href="#contact"
-            className="group relative rounded-full text-sm font-medium px-8 py-3.5 border border-[#1f1f1f] bg-[#0a0a0a]/80 backdrop-blur-md text-[#f5f5f5] hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2 w-full sm:w-auto hover:border-transparent"
+            className="group relative rounded-full text-xs sm:text-sm font-medium px-8 py-3.5 border border-[#1f1f1f] bg-[#0a0a0a]/80 backdrop-blur-md text-[#f5f5f5] hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2 w-full sm:w-auto hover:border-transparent"
           >
             <span className="absolute inset-0 rounded-full accent-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 p-[1px]" />
             <span className="absolute inset-[1px] rounded-full bg-[#0a0a0a] -z-10" />
@@ -160,12 +160,12 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 1 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
         <span className="text-[10px] text-[#878787] uppercase tracking-[0.25em] font-mono">
           SCROLL
         </span>
-        <div className="w-[1px] h-10 bg-[#1f1f1f] relative overflow-hidden">
+        <div className="w-[1px] h-8 sm:h-10 bg-[#1f1f1f] relative overflow-hidden">
           <div className="w-full h-1/2 accent-gradient animate-scroll-down" />
         </div>
       </motion.div>

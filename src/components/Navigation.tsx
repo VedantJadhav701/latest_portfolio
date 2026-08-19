@@ -3,11 +3,11 @@
 import React, { useState, useEffect } from 'react';
 
 const NAV_ITEMS = [
-  { label: 'Home', href: '#home' },
-  { label: 'Work', href: '#work' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Research', href: '#research' },
-  { label: 'Skills', href: '#skills' },
+  { label: 'Home', href: '#home', hideOnMobile: true },
+  { label: 'Work', href: '#work', hideOnMobile: false },
+  { label: 'Experience', href: '#experience', hideOnMobile: false },
+  { label: 'Research', href: '#research', hideOnMobile: true },
+  { label: 'Skills', href: '#skills', hideOnMobile: false },
 ];
 
 export default function Navigation() {
@@ -45,9 +45,9 @@ export default function Navigation() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 md:pt-6 px-4 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-3 md:pt-6 px-2 sm:px-4 pointer-events-none">
       <nav
-        className={`pointer-events-auto inline-flex items-center gap-1 sm:gap-2 rounded-full backdrop-blur-md border border-white/10 bg-[#141414]/90 p-1.5 sm:p-2 transition-all duration-300 ${
+        className={`pointer-events-auto max-w-[96vw] inline-flex items-center gap-0.5 sm:gap-2 rounded-full backdrop-blur-md border border-white/10 bg-[#141414]/90 p-1 sm:p-2 transition-all duration-300 ${
           scrolled ? 'shadow-lg shadow-black/60 bg-[#141414]' : 'shadow-md shadow-black/20'
         }`}
       >
@@ -55,16 +55,16 @@ export default function Navigation() {
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, '#home')}
-          className="group relative w-9 h-9 rounded-full p-[1.5px] accent-gradient transition-transform duration-300 hover:scale-110 flex items-center justify-center overflow-hidden"
+          className="group relative w-8 h-8 sm:w-9 sm:h-9 rounded-full p-[1.5px] accent-gradient transition-transform duration-300 hover:scale-110 flex items-center justify-center overflow-hidden shrink-0"
           title="Vedant Jadhav"
         >
-          <span className="w-full h-full bg-[#0a0a0a] rounded-full flex items-center justify-center font-display italic font-semibold text-[13px] text-[#f5f5f5]">
+          <span className="w-full h-full bg-[#0a0a0a] rounded-full flex items-center justify-center font-display italic font-semibold text-xs sm:text-[13px] text-[#f5f5f5]">
             VJ
           </span>
         </a>
 
         {/* 2. Divider */}
-        <div className="w-px h-5 bg-[#1f1f1f] mx-1 hidden sm:block" />
+        <div className="w-px h-4 sm:h-5 bg-[#1f1f1f] mx-0.5 sm:mx-1" />
 
         {/* 3. Nav Links */}
         <div className="flex items-center gap-0.5 sm:gap-1">
@@ -75,7 +75,9 @@ export default function Navigation() {
                 key={item.label}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`text-xs sm:text-sm rounded-full px-2.5 sm:px-4 py-1.5 transition-all duration-200 ${
+                className={`text-[11px] sm:text-sm rounded-full px-2 sm:px-4 py-1 sm:py-1.5 transition-all duration-200 ${
+                  item.hideOnMobile ? 'hidden sm:inline-block' : 'inline-block'
+                } ${
                   isActive
                     ? 'text-[#f5f5f5] bg-[#1f1f1f]'
                     : 'text-[#878787] hover:text-[#f5f5f5] hover:bg-[#1f1f1f]/60'
@@ -88,18 +90,18 @@ export default function Navigation() {
         </div>
 
         {/* 4. Divider */}
-        <div className="w-px h-5 bg-[#1f1f1f] mx-1 hidden sm:block" />
+        <div className="w-px h-4 sm:h-5 bg-[#1f1f1f] mx-0.5 sm:mx-1" />
 
         {/* 5. Say hi button */}
         <a
           href="#contact"
           onClick={(e) => handleNavClick(e, '#contact')}
-          className="relative group rounded-full text-xs sm:text-sm px-3.5 sm:px-4 py-1.5 text-[#f5f5f5] font-medium transition-transform duration-200 hover:scale-105"
+          className="relative group rounded-full text-[11px] sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5 text-[#f5f5f5] font-medium transition-transform duration-200 hover:scale-105 shrink-0"
         >
           <span className="absolute inset-0 rounded-full accent-gradient opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 p-[1px]" />
           <span className="absolute inset-[1px] rounded-full bg-[#141414] -z-10 group-hover:bg-[#0a0a0a] transition-colors" />
           <span className="flex items-center gap-1">
-            Say hi <span className="text-[11px] opacity-70">↗</span>
+            Say hi <span className="text-[10px] sm:text-[11px] opacity-70">↗</span>
           </span>
         </a>
       </nav>
